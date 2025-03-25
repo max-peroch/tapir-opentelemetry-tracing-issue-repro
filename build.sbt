@@ -2,19 +2,19 @@ import sbt._
 
 name := "otel-repro"
 scalaVersion := "2.13.16"
+libraryDependencySchemes += "org.typelevel" %% "otel4s-oteljava"  % VersionScheme.Always
 libraryDependencies ++= Seq(
-  "org.http4s" %% "http4s-ember-server" % "0.23.29",
-  "org.http4s" %% "http4s-ember-client" % "0.23.29",
-  "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "1.11.19",
-  "com.softwaremill.sttp.tapir" %% "tapir-cats" % "1.11.19",
-  "com.softwaremill.sttp.tapir" %% "tapir-opentelemetry-tracing" % "1.11.18", // TODO "1.11.19" breaks otel propagation
-  "org.typelevel" %% "cats-effect" % "3.6.0-RC2",
-  "org.typelevel" %% "otel4s-oteljava" % "0.12.0-RC3",
-  "org.typelevel" %% "otel4s-oteljava-context-storage" % "0.12.0-RC3",
+  "org.http4s" %% "http4s-ember-server" % "0.23.30",
+  "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "1.11.20",
+  "com.softwaremill.sttp.tapir" %% "tapir-cats" % "1.11.20",
+  "com.softwaremill.sttp.tapir" %% "tapir-otel4s-tracing" % "1.11.20",
+  "org.typelevel" %% "cats-effect" % "3.6.0",
+  "org.typelevel" %% "otel4s-oteljava" % "0.12.0",
+  "org.typelevel" %% "otel4s-oteljava-context-storage" % "0.12.0",
   "io.opentelemetry" % "opentelemetry-exporter-otlp" % "1.48.0" % Runtime,
   "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % "1.48.0" % Runtime,
-  "io.opentelemetry.instrumentation" % "opentelemetry-logback-mdc-1.0" % "2.13.3-alpha" % Runtime,
-  "ch.qos.logback" % "logback-classic" % "1.5.12",
+  "io.opentelemetry.instrumentation" % "opentelemetry-logback-mdc-1.0" % "2.14.0-alpha" % Runtime,
+  "ch.qos.logback" % "logback-classic" % "1.5.18",
   "net.logstash.logback" % "logstash-logback-encoder" % "8.0",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
 )
