@@ -3,7 +3,9 @@ import com.comcast.ip4s.{IpAddress, Port}
 import com.typesafe.scalalogging.StrictLogging
 import org.http4s.HttpRoutes
 import org.http4s.ember.server.EmberServerBuilder
+import org.typelevel.otel4s.context.LocalProvider
 import org.typelevel.otel4s.oteljava.OtelJava
+import org.typelevel.otel4s.oteljava.context.{Context, IOLocalContextStorage}
 import org.typelevel.otel4s.trace.Tracer
 import sttp.capabilities.fs2.Fs2Streams
 import sttp.tapir.server.ServerEndpoint
@@ -42,6 +44,9 @@ object Main extends IOApp with StrictLogging {
       .build
 
   override def run(args: List[String]): IO[ExitCode] = {
+
+    implicit val provider: LocalProvider[IO, Context] =
+      IOLocalContextStorage.localProvider[IO]
 
     val program = for {
       otel <- OtelJava.autoConfigured[IO]()
